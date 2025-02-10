@@ -2,10 +2,10 @@ name: CI Pipeline
 
 on:
   push:
-    branches: 
+    branches:
       - main
   pull_request:
-    branches: 
+    branches:
       - main
 
 jobs:
@@ -29,3 +29,18 @@ jobs:
     - name: Run tests
       run: |
         pytest
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.NGSTEVE }}
+        password: ${{ secrets.Nkolbisson@1234  }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: yourusername/flaskapp:latest
+
+  
